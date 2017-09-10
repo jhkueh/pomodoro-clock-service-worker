@@ -13,22 +13,29 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-  event.respondWith(caches.match(event.request).then(function(response) {
-    // if resource match cache
-    if (response !== undefined) {
-      return response;
-    } else {
-      return fetch(event.request).then(function (response) {
-        // fetch resource from network, then save a copy in cache
-        let responseClone = response.clone();
+    event.respondWith(caches.match(event.request).then(function(response) {
+        // if resource match cache
+        if (response !== undefined) {
+            return response;
+        }
 
-        caches.open('v1').then(function (cache) {
-          cache.put(event.request, responseClone);
+        var fetchRequest = event.request.clone();
+
+        return fetch(fetchRequest).then(function(response) {
+            // fetch resource from network, then save a copy in cache
+
+            if (!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+
+            var responseClone = response.clone();
+
+            caches.open('v1').then(function(cache) {
+                cache.put(event.request, responseClone);
+            });
+            return response;
+        }).catch(function() {
+            return caches.match('/pomodoro-clock-service-worker/sound/KeyChimes.mp3');
         });
-        return response;
-      }).catch(function () {
-        return caches.match('/pomodoro-clock-service-worker/sound/KeyChimes.mp3');
-      });
-    }
-  }));
+    }));
 });
