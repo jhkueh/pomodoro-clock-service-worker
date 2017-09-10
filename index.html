@@ -22,18 +22,18 @@
             </div>
             <div class="timer-ctrl">
                 <label>Session: &nbsp;
-                    <input type="text" maxlength="2" class="timer-box-input">
+                    <input type="text" v-model="sessionCtrl" maxlength="2" class="timer-box-input">
                 </label>
-                <input type="range" min="0" max="60" class="timer-slider">
+                <input type="range" v-model="sessionCtrl" min="0" max="60" class="timer-slider">
                 <label>Break: &nbsp;
-                    <input type="text" maxlength="2" class="timer-box-input">
+                    <input type="text" v-model="breakCtrl" maxlength="2" class="timer-box-input">
                 </label>
-                <input type="range" min="0" max="60" class="timer-slider">
+                <input type="range" v-model="breakCtrl" min="0" max="60" class="timer-slider">
                 <button type="button" class="btn btn-danger">Reset</button>
             </div>
         </div>
     </div>
-    
+
     <script src="//unpkg.com/vue@2.4.2/dist/vue.min.js"></script>
     <script src="js/app.js"></script>
 </body>
