@@ -1,6 +1,6 @@
 // register service worker
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/pomodoro-clock-service-worker/js/sw.js', {
+    navigator.serviceWorker.register('/pomodoro-clock-service-worker/sw.js', {
         scope: '/pomodoro-clock-service-worker/'
     }).then(function(reg) {
 
