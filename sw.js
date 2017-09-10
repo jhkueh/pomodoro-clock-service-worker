@@ -20,8 +20,10 @@ self.addEventListener('fetch', function(event) {
     } else {
       return fetch(event.request).then(function (response) {
         // fetch resource from network, then save a copy in cache
+        let responseClone = response.clone();
+
         caches.open('v1').then(function (cache) {
-          cache.put(event.request, response.clone());
+          cache.put(event.request, responseClone);
         });
         return response;
       }).catch(function () {
