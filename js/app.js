@@ -107,7 +107,7 @@ var vm = new Vue({
             if (this.state == START || this.state == BREAK) {
                 this.counter = this.limit - (Date.now() - this.startTime);
                 if (this.counter <= 0) {
-                    AUDIO[0].play();
+                    AUDIO.play();
                     if (this.state == BREAK) {
                         this.state = START;
                         this.stateMsg = 'Session';
